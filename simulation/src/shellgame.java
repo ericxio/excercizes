@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class shellgame {
 
-    public static void main(String args[]) throws FileNotFoundException;
+    public static void main(String args[]) throws FileNotFoundException
     {
         shellgame s = new shellgame();
         System.out.println(s.game());
@@ -22,10 +22,10 @@ public class shellgame {
         List<String> data = new ArrayList<String>();
         while (reader.hasNextLine()) {
             String curr = reader.nextLine();
-            if (data.size() == 0) swaps = Integer.parseInt(curr);
-            else {
-                data.add(curr);
-            }
+            if (curr.indexOf(" ") == -1) swaps = Integer.parseInt(curr);
+
+            else data.add(curr);
+
         }
 
 
@@ -36,7 +36,11 @@ public class shellgame {
             int curr = i;
             for (String s : data) {
                 String[] nums = s.split(" ");
+
+
                 curr = swap(curr,Integer.parseInt(nums[0]),Integer.parseInt(nums[1]));
+                //System.out.println(nums[0]+nums[1]+nums[2] + " "+curr);
+
                 if (curr == Integer.parseInt(nums[2])) count++;
 
             }
@@ -50,8 +54,9 @@ public class shellgame {
     }
 
     private int  swap (int curr, int first, int second) {
+        //System.out.println("swap "+first+" "+second);
         if (first == curr) curr = second;
-        if (second == curr) curr = first;
+        else if (second == curr) curr = first;
 
         return curr;
 
