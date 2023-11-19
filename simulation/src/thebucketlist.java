@@ -1,23 +1,15 @@
 import java.io.File;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
-public class thebucketlist {
-    private List<Integer> used;
-    private List<Integer> s_i;
-    private List<Integer> t_i;
-    private List<Integer> b_i;
+public class TheBucketList_v2 {
 
 
-    public thebucketlist() {
-        used = new ArrayList<Integer>();
-        s_i = new ArrayList<Integer>();
-        t_i = new ArrayList<Integer>();
-        b_i = new ArrayList<Integer>();
-
-
+    public static void main(String args[]) throws FileNotFoundException
+    {
+        TheBucketList_v2 s = new TheBucketList_v2();
+        System.out.println(s.start());
     }
 
     public int start() throws FileNotFoundException{
@@ -26,43 +18,30 @@ public class thebucketlist {
         File f = new File("C:\\Users\\Eric\\Documents\\coding\\usaco\\simulation\\src\\data.txt");
         Scanner reader = new Scanner(f);
 
-        List<Integer> data = new ArrayList<Integer>();
+        int [] change = new int[1001];
+
+
+        //List<Integer> data = new ArrayList<Integer>();
         int cows = reader.nextInt();
-        while (reader.hasNextInt()) {
-            int curr = reader.nextInt();
 
+        for (int i = 1; i < 1001; i++) {
+            if (!reader.hasNextInt())break;
+            int s = reader.nextInt();
+            int t = reader.nextInt();
+            int b = reader.nextInt();
 
-            data.add(curr);
-
-        }
-        int count = 0;
-
-        for (int n : data) {
-            if (count %3 == 1) s_i.add(n);
-            if (count %3 == 2) t_i.add(n);
-            if (count %3 == 0) b_i.add(n);
-            count++;
-
+            change[s] += b;
+            change[t] -= b;
         }
 
-        for (int i = 0; i < cows; i++) {
-            int s = s_i.get(i);
-            int t = t_i.get(i);
-            int b = b_i.get(i);
+        int total = 0;
+        int max = 0;
 
-
-            for (int j = 1; j <= 2147483647; j++) {
-                if (b == 0) break;
-                if(!used.contains(j)) {
-                    used.add(j);
-                    b--;
-                }
-
-
-            }
-
+        for (int i = 1; i < 1001; i++) {
+            total += change[i];
+            max = Math.max(total, max);
         }
-    return 0;
+    return max;
 
     }
 }
