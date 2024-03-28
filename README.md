@@ -1,10 +1,4 @@
-# usaco
-usaco training
-
-
-
-
-
+# excercizes
 
 
 
